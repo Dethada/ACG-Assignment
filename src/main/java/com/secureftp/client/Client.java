@@ -74,7 +74,7 @@ public class Client {
 
 			if (cmdargs.hasOption("h")) {
 				System.out.println("Secure FTP Client\n");
-				formatter.printHelp("java -jar Client.jar <options>", options);
+				formatter.printHelp("java -jar SecureFTP-Client.jar <options>", options);
 				System.exit(0);
 			}
 
@@ -82,8 +82,8 @@ public class Client {
 				HOST = cmdargs.getOptionValue("s");
 				if (!HOST.matches("([0-9]{1,3}\\.){3}[0-9]{1,3}")) {
 					System.out.println("Invalid IP detected\n");
-					System.out.println("Usage: java -jar Client.jar <options>");
-					System.out.println("Use -h to display help");
+					System.out.println("Secure FTP Client\n");
+					formatter.printHelp("java -jar SecureFTP-Client.jar <options>", options);
 					System.exit(0);
 				}
 			}
@@ -93,8 +93,8 @@ public class Client {
 					PORT = Integer.parseInt(cmdargs.getOptionValue("p"));
 				} catch (NumberFormatException e) {
 					System.out.println("Int Expected for -p\n");
-					System.out.println("Usage: java -jar Client.jar <options>");
-					System.out.println("Use -h to display help");
+					System.out.println("Secure FTP Client\n");
+					formatter.printHelp("java -jar SecureFTP-Client.jar <options>", options);
 					System.exit(0);
 				}
 			}
@@ -105,8 +105,8 @@ public class Client {
 
 		} catch (ParseException e) {
 			System.out.println(e.getMessage() + '\n');
-			System.out.println("Usage: java -jar Client.jar <options>");
-			System.out.println("Use -h to display help");
+			System.out.println("Secure FTP Client\n");
+			formatter.printHelp("java -jar SecureFTP-Client.jar <options>", options);
 			System.exit(1);
 		}
 

@@ -56,6 +56,7 @@ public class Server {
 		CommandLine cmdargs;
 
 		int port = 21;
+		int backloglimit = 50;
 		InetAddress bindaddr = InetAddress.getByName("0.0.0.0");
 		String keyStore, keyStorePass, aliasName, aliasPass, bannerpath, banner, defaultdir, authfile;
 		keyStore = keyStorePass = aliasName = aliasPass = bannerpath = banner = defaultdir = authfile = "";
@@ -73,6 +74,12 @@ public class Server {
 				port = Integer.parseInt(prop.getProperty("PORT"));
 			} catch (NumberFormatException e) {
 				System.out.println("Invalid Port number, please check the configuration file.");
+				System.exit(0);
+			}
+			try {
+				backloglimit = Integer.parseInt(prop.getProperty("BACKLOG_LIMIT"));
+			} catch (NumberFormatException e) {
+				System.out.println("Invalid Connection limit, please check the configuration file.");
 				System.exit(0);
 			}
 			String addr = prop.getProperty("BIND_ADDR");
@@ -101,7 +108,7 @@ public class Server {
 
 			if (cmdargs.hasOption("h")) {
 				System.out.println("Secure FTP Server\n");
-				formatter.printHelp("java -jar Server.jar <options>", options);
+				formatter.printHelp("java -jar SecureFTP-Server.jar <options>", options);
 				System.exit(0);
 			}
 			try {
@@ -112,7 +119,8 @@ public class Server {
 			}
 
 		} catch (ParseException e) {
-			System.out.println(e.getMessage() + "\nUsage: java Server <options>\nUse -h to display help");
+			System.out.println(e.getMessage() + "\n\nSecure FTP Server\n");
+			formatter.printHelp("java -jar SecureFTP-Server.jar <options>", options);
 			System.exit(1);
 		} catch (FileNotFoundException e) {
 			System.out.println("Invalid server configuration file.");
@@ -120,8 +128,8 @@ public class Server {
 		}
 
 		try {
-			new Server(keyStore, keyStorePass, aliasName, aliasPass).start(bindaddr, port, banner, defaultdir,
-					authfile);
+			new Server(keyStore, keyStorePass, aliasName, aliasPass).start(bindaddr, port, backloglimit, banner,
+					defaultdir, authfile);
 		} catch (Exception e) {
 			System.out.println("An unexpected Error Occured\n" + e.getMessage());
 		}
@@ -166,18 +174,18 @@ public class Server {
 	/**
 	 * Listen for client connections
 	 * 
-	 * @param bindaddr   IP address for server to bind to
-	 * @param port       Port for server to listen on
-	 * @param maxcon     Maximum number of connections the server allows
-	 * @param banner     Banner to send the client upon connection
-	 * @param defaultdir Absolute path to Default directory
+	 * @param bindaddr     IP address for server to bind to
+	 * @param port         Port for server to listen on
+	 * @param backloglimit Connection request queue limit
+	 * @param banner       Banner to send the client upon connection
+	 * @param defaultdir   Absolute path to Default directory
 	 * @throws CertificateException When something is wrong with the certificate
 	 */
-	private void start(InetAddress bindaddr, int port, String banner, String defaultdir, String authfile)
-			throws CertificateException {
+	private void start(InetAddress bindaddr, int port, int backloglimit, String banner, String defaultdir,
+			String authfile) throws CertificateException {
 		ServerSocket sock = null;
 		try {
-			sock = new ServerSocket(port);
+			sock = new ServerSocket(port, backloglimit);
 			LOG.info("Server Startup successful");
 			LOG.info("Listening for connections on " + bindaddr.getHostAddress() + ":" + port);
 			while (true) {

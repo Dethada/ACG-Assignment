@@ -115,8 +115,8 @@ public class Register {
      * @param exitcd    Program Exit code
      */
     private static void exit(HelpFormatter formatter, Options options, int exitcd) {
-        System.out.println("Secure FTP Client\n");
-        formatter.printHelp("java -jar Client.jar <options>", options);
+        System.out.println("Secure FTP Register Tool\n");
+        formatter.printHelp("java -jar SecureFTP-Register.jar <options>", options);
         System.exit(exitcd);
     }
 

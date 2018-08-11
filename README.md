@@ -22,6 +22,9 @@ openssl pkcs12 -export -out server.pfx -inkey server.key -in server.crt -certfil
 BIND_ADDR=0.0.0.0
 # Port which server listens on
 PORT=9000
+# Connection request queue limit, may not work on some Operating Systems
+# Does not represent maximum concurrent connection limit
+BACKLOG_LIMIT=100
 # Key Store Path
 KEYSTORE=pki/server.pfx
 # Key Store Password

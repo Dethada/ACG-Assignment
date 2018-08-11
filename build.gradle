@@ -18,7 +18,7 @@ apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-defaultTasks 'clean', 'client', 'server'
+defaultTasks 'clean', 'client', 'server', 'register'
 //create a single Jar with all dependencies
 
 task client(type: ShadowJar) {
@@ -41,6 +41,17 @@ task server(type: ShadowJar) {
     configurations = [project.configurations.runtime] // Same as the above
     exclude('META-INF/INDEX.LIST', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA') // This one is actually really important!
     archiveName = 'SecureFTP-Server-' + version + '.jar'
+ // Here you can add other Jar properties like destinationDir, for example
+}
+task register(type: ShadowJar) {
+    group = "shadow" // Not a must have, but it's always good to have a group, you can chose whichever - this is the one shadowJar belongs to
+    description = "Builds a Secure FTP Registery tool executable jar" // Same as the above
+    manifest.attributes 'Main-Class': 'com.secureftp.server.Register' // The main attraction! Be sure to update this line
+    classifier = 'Register' // General jar task property - see more about it in the Gradle manual
+    from(project.convention.getPlugin(JavaPluginConvention).sourceSets.main.output) // Leave as is
+    configurations = [project.configurations.runtime] // Same as the above
+    exclude('META-INF/INDEX.LIST', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA') // This one is actually really important!
+    archiveName = 'SecureFTP-Register-' + version + '.jar'
  // Here you can add other Jar properties like destinationDir, for example
 }
 /*
@@ -67,7 +78,6 @@ task server(type: Jar) {
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
-
 */
 
 dependencies {
@@ -79,4 +89,6 @@ dependencies {
     compile group: 'commons-codec', name: 'commons-codec', version: '1.11'
     // https://mvnrepository.com/artifact/commons-io/commons-io/2.6
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
+    // https://mvnrepository.com/artifact/org.mindrot/jbcrypt
+    compile group: 'org.mindrot', name: 'jbcrypt', version: '0.4'
 }

@@ -1,4 +1,4 @@
-# ACG
+# ACG [![Build Status](https://travis-ci.com/PotatoDrug/ACG-Assignment.svg?token=6u9dQjLz7vCpD1gzxyL5&branch=master)](https://travis-ci.com/PotatoDrug/ACG-Assignment)
 Deadline: 15 August 2018
 
 ## CA and Server Certificate setup

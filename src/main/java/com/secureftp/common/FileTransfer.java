@@ -15,11 +15,17 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FileUtils;
 
 public class FileTransfer {
+    /**
+     * Sends a file over ObjectOutputStream
+     * 
+     * @param fullfilename The absolute path of the file to be sent
+     * @param out          The stream the file is going to be sent over
+     */
     public static void sendFile(String fullfilename, ObjectOutputStream out) throws IOException {
         String[] tmp = fullfilename.split("/");
         String fname = tmp[tmp.length - 1];
         File targetfile = new File(fullfilename);
-        if(!targetfile.exists()) { 
+        if (!targetfile.exists()) {
             out.writeUTF("File does not exist " + fullfilename);
             out.flush();
             return;
@@ -38,9 +44,9 @@ public class FileTransfer {
         out.writeLong(flength);
         out.flush();
         DataInputStream dis = new DataInputStream(new FileInputStream(fullfilename));
-        
-        try{
-            for (long i=0; i < flength; i++) {
+
+        try {
+            for (long i = 0; i < flength; i++) {
                 out.writeByte(dis.readByte());
             }
             out.flush();
@@ -52,15 +58,18 @@ public class FileTransfer {
     }
 
     /**
+     * Recieves a file from ObjectInputStream
      * 
+     * @param in   Stream used for recieving the file
+     * @param cdir The directory that we are going to recieve the file in
      * @return null if data is corrupted
      */
     public static String recvFile(ObjectInputStream in, String cdir) throws IOException {
         String fname = in.readUTF();
         Long flength = in.readLong();
-        String fullpath = cdir+"/"+fname;
+        String fullpath = cdir + "/" + fname;
         FileOutputStream fos = new FileOutputStream(fullpath);
-        for (long i=0; i < flength;i++) {
+        for (long i = 0; i < flength; i++) {
             fos.write(in.read());
         }
         fos.flush();
@@ -73,7 +82,12 @@ public class FileTransfer {
         return fullpath;
     }
 
-    private static boolean canReadFile(File file){
+    /**
+     * Check if file can be read
+     * 
+     * @return true if file can be read, else return false
+     */
+    private static boolean canReadFile(File file) {
         try {
             FileReader fileReader = new FileReader(file.getAbsolutePath());
             fileReader.read();
@@ -84,6 +98,11 @@ public class FileTransfer {
         return true;
     }
 
+    /**
+     * Hashes a file with sha1
+     * 
+     * @return The Hash in hex string
+     */
     private static String hashFile(String fname) throws IOException {
         return DigestUtils.sha1Hex(Files.newInputStream(Paths.get(fname)));
     }

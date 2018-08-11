@@ -4,12 +4,16 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import com.secureftp.common.Utils;
 
-public class Logger {
+public class UserLogger {
+	private String USER;
 
 	/**
 	 * Initalize Logger
+	 * 
+	 * @param verbose Determines amound of details printed
 	 */
-	public Logger() {
+	public UserLogger(String USER) {
+		this.USER = USER;
 	}
 
 	/**
@@ -48,8 +52,8 @@ public class Logger {
 	 */
 	private void output(String type, String msg) {
 		String prefix = type.equals("error") ? Utils.ANSI_RED : Utils.ANSI_CYAN;
-		System.out.println(prefix + "[" + type + "] - " + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date())
-				+ " - " + msg + Utils.ANSI_RESET);
+		System.out.println(prefix + "[" + type + "] - [" + USER + "] - "
+				+ new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date()) + " - " + msg + Utils.ANSI_RESET);
 	}
 
 	/**
@@ -61,9 +65,10 @@ public class Logger {
 	 */
 	private void output(String type, String msg, Exception e) {
 		String prefix = type.equals("error") ? Utils.ANSI_RED : Utils.ANSI_CYAN;
-		System.out.println(prefix + "[" + type + "] - " + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date())
-				+ " - " + msg + Utils.ANSI_RESET);
-		System.out.println(prefix + "[" + type + "] - " + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date())
-				+ " Exception: " + e.getMessage() + Utils.ANSI_RESET);
+		System.out.println(prefix + "[" + type + "] - [" + USER + "] - "
+				+ new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date()) + " - " + msg + Utils.ANSI_RESET);
+		System.out.println(prefix + "[" + type + "] - [" + USER + "] - "
+				+ new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date()) + " Exception: " + e.getMessage()
+				+ Utils.ANSI_RESET);
 	}
 }

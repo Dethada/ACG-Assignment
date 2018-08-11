@@ -23,7 +23,7 @@ BIND_ADDR=0.0.0.0
 # Port which server listens on
 PORT=9000
 # Key Store Path
-KEYSTORE=src/main/resources/server.pfx
+KEYSTORE=pki/server.pfx
 # Key Store Password
 KEYSTORE_PASS=password
 # Alias for cert in keystore
@@ -76,5 +76,5 @@ java -jar SecureFTP-Register.jar -d -u test -p 'src/main/resources/auth'
 # Run the server
 java -jar SecureFTP-Server.jar -c 'src/main/resources/SecureFTP.conf'
 # run client
-java -jar SecureFTP-Client.jar -s 127.0.0.1 -p 9000 -c 'src/main/resources/CA.crt'
+java -jar SecureFTP-Client.jar -s 127.0.0.1 -p 9000 -c 'pki/CA.crt'
 ```

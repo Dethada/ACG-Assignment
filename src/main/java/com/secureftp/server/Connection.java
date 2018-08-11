@@ -111,7 +111,7 @@ public class Connection extends Thread implements Runnable {
 			SIN = new ObjectInputStream(proto.getInputStream());
 			SOUT.flush();
 
-			// LOG.verbose("Connection established with " + REMOTE);
+			LOG.info("Connection from " + REMOTE);
 
 			sendReply(BANNER);
 
@@ -319,9 +319,8 @@ public class Connection extends Thread implements Runnable {
 
 	/**
 	 * Verify user credentials
-	 * 
 	 * @param login Login object containing username and password
-	 * @return true if username and password are valid, else return false
+	 * @return true if username and password are valid, else return
 	 */
 	private boolean verifyUser(Login login) {
 		String username = login.getUsername();

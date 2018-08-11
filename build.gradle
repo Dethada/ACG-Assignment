@@ -18,7 +18,7 @@ apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-defaultTasks 'clean', 'client', 'server', 'register'
+defaultTasks 'clean', 'client', 'server', 'register', 'distrib'
 //create a single Jar with all dependencies
 
 task client(type: ShadowJar) {
@@ -53,6 +53,14 @@ task register(type: ShadowJar) {
     exclude('META-INF/INDEX.LIST', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA') // This one is actually really important!
     archiveName = 'SecureFTP-Register-' + version + '.jar'
  // Here you can add other Jar properties like destinationDir, for example
+}
+task distrib {
+    doLast {
+        copy {
+            from 'build/libs/.'
+            into 'distrib/'
+        }
+    }
 }
 /*
 task client(type: Jar) {

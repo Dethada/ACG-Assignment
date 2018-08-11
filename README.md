@@ -68,9 +68,9 @@ java -jar SecureFTP-Client-0.1.jar -s <server IP> -p <server port> -c <path to C
 ### Sample Usage
 ```bash
 # Registering a new user
-java -jar SecureFTP-Register-0.1.jar -a -u <username> -p 'src/main/resources/auth'
+java -jar SecureFTP-Register-0.1.jar -a -u test -p 'src/main/resources/auth'
 # Delete a user
-java -jar SecureFTP-Register-0.1.jar -d -u <username> -p 'src/main/resources/auth'
+java -jar SecureFTP-Register-0.1.jar -d -u test -p 'src/main/resources/auth'
 # Run the server
 java -jar SecureFTP-Server-0.1.jar -c 'src/main/resources/SecureFTP.conf'
 # run client

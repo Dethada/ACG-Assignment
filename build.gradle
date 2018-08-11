@@ -29,7 +29,7 @@ task client(type: ShadowJar) {
     from(project.convention.getPlugin(JavaPluginConvention).sourceSets.main.output) // Leave as is
     configurations = [project.configurations.runtime] // Same as the above
     exclude('META-INF/INDEX.LIST', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA') // This one is actually really important!
-    archiveName = 'SecureFTP-Client-' + version + '.jar'
+    archiveName = 'SecureFTP-Client.jar'
  // Here you can add other Jar properties like destinationDir, for example
 }
 task server(type: ShadowJar) {
@@ -40,7 +40,7 @@ task server(type: ShadowJar) {
     from(project.convention.getPlugin(JavaPluginConvention).sourceSets.main.output) // Leave as is
     configurations = [project.configurations.runtime] // Same as the above
     exclude('META-INF/INDEX.LIST', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA') // This one is actually really important!
-    archiveName = 'SecureFTP-Server-' + version + '.jar'
+    archiveName = 'SecureFTP-Server.jar'
  // Here you can add other Jar properties like destinationDir, for example
 }
 task register(type: ShadowJar) {
@@ -51,7 +51,7 @@ task register(type: ShadowJar) {
     from(project.convention.getPlugin(JavaPluginConvention).sourceSets.main.output) // Leave as is
     configurations = [project.configurations.runtime] // Same as the above
     exclude('META-INF/INDEX.LIST', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA') // This one is actually really important!
-    archiveName = 'SecureFTP-Register-' + version + '.jar'
+    archiveName = 'SecureFTP-Register.jar'
  // Here you can add other Jar properties like destinationDir, for example
 }
 task distrib {

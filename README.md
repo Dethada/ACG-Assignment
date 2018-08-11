@@ -33,6 +33,8 @@ ALIAS_PASS=password
 # Banner for Secure FTP Server
 BANNER=src/main/resources/banner.txt
 # Absolute path to Default directory
+# Note to windows users Replace '\' with '/'
+# Eg. C:\Documents\Files to C:/Documents/Files
 DEFAULT_DIR=/tmp
 # Authorization file path
 AUTH_FILE=src/main/resources/auth

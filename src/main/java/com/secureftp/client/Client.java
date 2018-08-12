@@ -256,9 +256,10 @@ public class Client {
 		} catch (TlsNoCloseNotifyException e) {
 			Output.error("Connection closed by server");
 			System.exit(1);
-		} catch (Exception e) {
-			Output.error("An error occurred " + e.getMessage());
-		}
+		} 
+		// catch (Exception e) {
+		// 	Output.error("An error occurred " + e.getMessage());
+		// }
 	}
 
 	/**
@@ -319,10 +320,6 @@ public class Client {
 			String msg = "Server identity not verified";
 			Output.error(msg);
 		}
-		if (exitCd == 2) {
-			String msg = "Data received is corrupted";
-			Output.error(msg);
-		}
 		try {
 			SIN.close();
 			SOUT.close();
@@ -334,8 +331,8 @@ public class Client {
 			} else {
 				System.exit(0);
 			}
-		} catch (IOException e) {
-			Output.error("Unexpected Exception " + e.getMessage());
+		} catch (Exception e) {
+			System.exit(1);
 		}
 	}
 }

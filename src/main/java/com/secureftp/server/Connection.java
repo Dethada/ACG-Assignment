@@ -258,8 +258,11 @@ public class Connection extends Thread implements Runnable {
 			// Closes Connection
 			close();
 		} catch (SocketException e) {
-			USERLOG.info("Client Closed Connection");
-			close();
+			try {
+				USERLOG.info("Client Closed Connection");
+			} catch(NullPointerException ee) {
+				LOG.info("Client Closed Connection");
+			}
 		} catch (EOFException e) {
 		} catch (Exception e) {
 			LOG.error("Unexpected Exception", e);

@@ -350,7 +350,7 @@ public class Connection extends Thread implements Runnable {
 			SIN.close();
 			SOCKET.close();
 		} catch (IOException e) {
-			LOG.error("An unexpected error occurred : ", e);
+			LOG.error("IOException : ", e);
 		}
 	}
 }

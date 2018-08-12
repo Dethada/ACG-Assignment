@@ -110,7 +110,7 @@ public class Client {
 			System.exit(1);
 		}
 
-		// Initialise Connection
+		// Initialize Connection
 		CWD = System.getProperty("user.dir");
 		HOMEDIR = System.getProperty("user.home");
 
@@ -125,7 +125,7 @@ public class Client {
 			e.printStackTrace();
 		}
 
-		Output.info("Connecting to server at " + HOST + ':' + PORT);
+		Output.info("Connecting to " + HOST + ':' + PORT);
 		Security.addProvider(new BouncyCastleProvider());
 		try {
 			SOCKET = new Socket(HOST, PORT);
@@ -155,8 +155,8 @@ public class Client {
 				close(1);
 
 			/*
-			 * Get TLS connection socket stream Traffic using this stream will be encrypted
-			 * and decrypted automatically
+			 * Get TLS connection socket stream, this stream will be encrypted and decrypted
+			 * automatically
 			 */
 			SOUT = new ObjectOutputStream(cproto.getOutputStream());
 			SIN = new ObjectInputStream(cproto.getInputStream());
@@ -256,10 +256,7 @@ public class Client {
 		} catch (TlsNoCloseNotifyException e) {
 			Output.error("Connection closed by server");
 			System.exit(1);
-		} 
-		// catch (Exception e) {
-		// 	Output.error("An error occurred " + e.getMessage());
-		// }
+		}
 	}
 
 	/**
@@ -290,7 +287,7 @@ public class Client {
 		boolean valid = false;
 
 		if (servCert == null)
-			throw new IllegalArgumentException("Server Certificate Not Found");
+			throw new IllegalArgumentException("Server Certificate not Found");
 
 		if (!CACERT.equals(servCert)) {
 			try {
@@ -305,7 +302,7 @@ public class Client {
 			servCert.checkValidity();
 			valid = true;
 		} catch (Exception e) {
-			Output.error("Server Certificate is expired");
+			Output.error("Server Certificate expired");
 		}
 		VALID = ca && valid;
 	}
@@ -317,8 +314,7 @@ public class Client {
 	 */
 	private static void close(int exitCd) {
 		if (exitCd == 1) {
-			String msg = "Server identity not verified";
-			Output.error(msg);
+			Output.error("Invalid Server Certificate");
 		}
 		try {
 			SIN.close();

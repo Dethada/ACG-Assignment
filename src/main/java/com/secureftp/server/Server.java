@@ -186,7 +186,6 @@ public class Server {
 		ServerSocket sock = null;
 		try {
 			sock = new ServerSocket(port, backloglimit);
-			LOG.info("Server Startup successful");
 			LOG.info("Listening for connections on " + bindaddr.getHostAddress() + ":" + port);
 			while (true) {
 				new Connection(sock.accept(), CERT, KEYPAIR, banner, defaultdir, authfile, LOG).start();

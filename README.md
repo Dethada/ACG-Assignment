@@ -61,23 +61,23 @@ Precompiled JAR files are avaliable at [distrib](distrib/) folder
 You can pass in `-h` to get the available options for each program.
 ```bash
 # Registering a new user
-java -jar SecureFTP-Register.jar -a -u <username> -p <path to auth file>
+java -jar distrib/SecureFTP-Register.jar -a -u <username> -p <path to auth file>
 # Delete a user
-java -jar SecureFTP-Register.jar -d -u <username> -p <path to auth file>
+java -jar distrib/SecureFTP-Register.jar -d -u <username> -p <path to auth file>
 # Run the server
-java -jar SecureFTP-Server.jar -c <path to conf file>
+java -jar distrib/SecureFTP-Server.jar -c <path to conf file>
 # run client
-java -jar SecureFTP-Client.jar -s <server IP> -p <server port> -c <path to CA cert>
+java -jar distrib/SecureFTP-Client.jar -s <server IP> -p <server port> -c <path to CA cert>
 ```
 
 ### Sample Usage
 ```bash
 # Registering a new user
-java -jar SecureFTP-Register.jar -a -u test -p 'src/main/resources/auth'
+java -jar distrib/SecureFTP-Register.jar -a -u test -p 'src/main/resources/auth'
 # Delete a user
-java -jar SecureFTP-Register.jar -d -u test -p 'src/main/resources/auth'
+java -jar distrib/SecureFTP-Register.jar -d -u test -p 'src/main/resources/auth'
 # Run the server
-java -jar SecureFTP-Server.jar -c 'src/main/resources/SecureFTP.conf'
+java -jar distrib/SecureFTP-Server.jar -c 'src/main/resources/SecureFTP.conf'
 # run client
-java -jar SecureFTP-Client.jar -s 127.0.0.1 -p 9000 -c 'pki/CA.crt'
+java -jar distrib/SecureFTP-Client.jar -s 127.0.0.1 -p 9000 -c 'pki/CA.crt'
 ```

@@ -80,12 +80,6 @@ public class Client {
 
 			if (cmdargs.hasOption("s")) {
 				HOST = cmdargs.getOptionValue("s");
-				if (!HOST.matches("([0-9]{1,3}\\.){3}[0-9]{1,3}")) {
-					System.out.println("Invalid IP detected\n");
-					System.out.println("Secure FTP Client\n");
-					formatter.printHelp("java -jar SecureFTP-Client.jar <options>", options);
-					System.exit(0);
-				}
 			}
 
 			if (cmdargs.hasOption("p")) {
